@@ -1,60 +1,66 @@
 import React, { Component } from 'react';
 
-
 export class ContentLimitCalc extends Component {
     static displayName = ContentLimitCalc.name;
 
     constructor(props) {
         super(props);
-        this.state = { text: "", viewModel: null, loading: true };
-        //this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = { refresh: false, viewModel: null, loading: true };
     }
 
-    static handleSubmit() {
+    handleSubmit() {
         var formData = new FormData();
+        if (this.itemname.value.length != 0 &&
+            this.itemvalue.value.length != 0) {
+            fetch('ContentsList/addnew', {
+                method: "POST",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    itemName: this.itemname.value,
+                    itemValue: this.itemvalue.value,
+                    itemCategory: this.itemcategory.value
+                }),
+            }).then(
+                response => response.text())
+                .then(() => {
+                    this.setstate = { loading: true};
+                    this.componentDidMount();
+                });
 
-        fetch('ContentsList/addnew', {
-            method: "POST",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                itemName: this.itemname.value,
-                itemValue: this.itemvalue.value,
-                itemCategory: this.itemcategory.value
-            }),
-        }).then(response => response.text())
-            .then(formData => {
-                this.setState({ text: formData, loading: false });
-            });
 
-        window.location.reload(true);
+        } else {
+            alert("You must enter a value for Name or Value.");
+        }
     }
 
-    static deleteItem(itemId) {
+    deleteItem(itemId) {
         fetch('ContentsList/' + itemId, {
             method: 'delete'
-        });
-        {
-            window.location.reload(true);
-        }
+        }).then(
+            response => response.text())
+            .then(() => {
+                this.setstate = { loading: true };
+                this.componentDidMount();
+            });
     }
 
     componentDidMount() {
         this.populateContentsList();
     }
 
-    static renderContentTable(contentsList, categories) {
+    renderContentTable(contentsList, categories) {
         return (
             <>
-                <div>{ContentLimitCalc.renderCategoryContents(contentsList)}</div>
-                <div>{ContentLimitCalc.renderAddForm(categories)}</div>
+                <div>{this.renderCategoryContents(contentsList)}</div>
+                <div>{this.renderAddForm(categories)}</div>
             </>
         );
     }
 
-    static renderCategoryContents(contentsList) {
+    renderCategoryContents(contentsList) {
         return (
             contentsList.map((category) =>
                 <div id="content_div" key={category.categoryName}>
@@ -67,7 +73,7 @@ export class ContentLimitCalc extends Component {
                         </tbody>
                         <tr>
                             <td>
-                                {ContentLimitCalc.renderContentDetails(category)}
+                                {this.renderContentDetails(category)}
                            </td>
                         </tr>
                     </table>
@@ -77,7 +83,7 @@ export class ContentLimitCalc extends Component {
         );
     }
 
-    static renderContentDetails(categoryDetails) {
+    renderContentDetails(categoryDetails) {
         if (categoryDetails.contents != null) {
             return (
                 categoryDetails.contents.map((contentDetails) =>
@@ -99,7 +105,7 @@ export class ContentLimitCalc extends Component {
         }
    }
 
-    static renderAddForm(categories) {
+    renderAddForm(categories) {
         return (
             <div id="additemform">
                     <table id="additemform">
@@ -118,7 +124,7 @@ export class ContentLimitCalc extends Component {
         );
     }
 
-    static renderCategoryDropdown(categories) {
+    renderCategoryDropdown(categories) {
         return (
             categories.map((c) =>
                 <option key={c.categoryId} value={c.categoryName}>{c.categoryName}</option>
@@ -129,7 +135,7 @@ export class ContentLimitCalc extends Component {
     render() {
     let contents = this.state.loading
         ? <p><em>Loading...</em></p>
-        : ContentLimitCalc.renderContentTable(this.state.viewModel.contentsList, this.state.viewModel.categoryList);
+        : this.renderContentTable(this.state.viewModel.contentsList, this.state.viewModel.categoryList);
         
             return (
         <div>
@@ -143,6 +149,6 @@ export class ContentLimitCalc extends Component {
     async populateContentsList() {
     const response = await fetch('ContentsList');
         const model = await response.json();
-        this.setState({ viewModel: model, loading: false });
+        this.setState({viewModel: model, loading: false });
     }
 }
