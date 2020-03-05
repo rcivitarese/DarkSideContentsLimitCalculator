@@ -19,7 +19,7 @@ namespace DSCLC.DataLayer
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=C:\\Users\\array\\source\\repos\\DarkSideContentsLimitCalculator\\Data\\DarkSideContentsLimitDB.mdf;Integrated Security=True;Connect Timeout=30");
+                optionsBuilder.UseSqlServer("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=Data\\DarkSideContentsLimitDB.mdf;Integrated Security=True;Connect Timeout=30");
             }
         }
 

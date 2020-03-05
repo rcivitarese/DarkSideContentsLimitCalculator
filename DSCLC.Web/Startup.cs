@@ -1,3 +1,4 @@
+using System.IO;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
@@ -24,8 +25,11 @@ namespace DSCLC.Web
 
             services.AddControllersWithViews();
 
+            string dbName = (string)Configuration.GetValue(typeof(string), "DBFileName");
+            string fullDBPath = string.Format(Configuration.GetConnectionString("DSCLCDBContext"), Directory.GetCurrentDirectory(), dbName);
+            
             services.AddDbContext<DSCLCDBContext>(options =>
-            options.UseSqlServer(Configuration.GetConnectionString("DSCLCDBContext")));
+            options.UseSqlServer(fullDBPath));
 
             services.AddTransient<IRenterContentService, RenterContentService>();
 
