@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace DSCLC.DataLayer
+namespace DSCLC.Web.ViewModels
 {
-    public class ContentItem
+    public class ContentDetailsViewModel
     {
         public int ContentItemId { get; set; }
         public string Name { get; set; }

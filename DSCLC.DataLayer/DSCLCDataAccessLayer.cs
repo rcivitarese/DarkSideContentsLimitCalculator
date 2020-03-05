@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using DSCLC.DataLayer;
 
 namespace DSCLC.DataLayer
@@ -9,7 +11,7 @@ namespace DSCLC.DataLayer
     public class DSCLCDataAccessLayer
     {
 
-        public IEnumerable<RenterContents> GetRenterContents(int renterContentsId)
+        public IEnumerable<ContentList> GetRenterContents(int renterContentsId)
         {
             try
             {
@@ -22,6 +24,7 @@ namespace DSCLC.DataLayer
 
         }
 
-        DSCLCDBContext _db = new DSCLCDBContext();
+        DSCLCDBContext _dbContext;
+
     }
 }

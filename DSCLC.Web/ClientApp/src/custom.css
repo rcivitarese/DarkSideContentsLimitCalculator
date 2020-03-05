@@ -12,3 +12,76 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
+
+#content_table {
+    width: 100%;
+}
+
+#content_div {
+    width: 80%;
+}
+
+#category_heading tbody {
+    width: 100%;
+    border-color: black;
+    border: thin;
+}
+#contents_numeric_value {
+    text-align: right;
+}
+
+#contents_text_value {
+    text-align: left;
+}
+
+#content_category table {
+    width: 100%;
+}
+
+#additemform table {
+    width: 80%;
+    border-color: black;
+    border: thin;
+}
+
+#details_spacecol {
+    width: 10%;
+}
+
+#details_col2 {
+    width: 45%;
+    text-align: left;
+}
+
+#details_col3 {
+    width: 25%;
+    text-align: right;
+}
+
+#details_col4 {
+    width: 10%;
+}
+
+#additemform {
+    width: 100%;
+    border-color: black;
+    border: thin;
+}
+
+#addform_spacecol {
+    width: 5%;
+}
+
+#addform_col2 {
+    width: 45%;
+    text-align: left;
+}
+
+#addform_col3 {
+    width: 25%;
+    text-align: right;
+}
+
+#addform_col4 {
+    width: 10%;
+}

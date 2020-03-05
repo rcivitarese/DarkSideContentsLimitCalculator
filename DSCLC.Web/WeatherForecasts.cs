@@ -2,7 +2,7 @@ using System;
 
 namespace DSCLC.Web
 {
-    public class WeatherForecast
+    public class WeatherForecasts
     {
         public DateTime Date { get; set; }
 

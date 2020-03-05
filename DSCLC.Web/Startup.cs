@@ -27,6 +27,8 @@ namespace DSCLC.Web
             services.AddDbContext<DSCLCDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("DSCLCDBContext")));
 
+            services.AddTransient<IRenterContentService, RenterContentService>();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {

@@ -7,7 +7,12 @@ namespace DSCLC.DataLayer
 {
     public interface IRenterContentRepository
     {
-        List<RenterContents> GetRenterContentLists();
-        RenterContents GetRenterContentsById(int RenterContentId);
+        List<ContentItem> GetAllContentItems();
+
+        public List<string> GetCategoryList();
+
+        void DeleteItem(int itemId);
+
+        void AddItem(ContentItem contentItem);
     }
 }

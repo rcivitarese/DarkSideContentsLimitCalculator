@@ -13,7 +13,9 @@ namespace DSCLC.Tests
         [Test]
         public void Test1()
         {
-            
+            //RenterContentService service = new RenterContentService();
+
+            //service.GetAllContentItems();
             
             Assert.Pass();
         }
